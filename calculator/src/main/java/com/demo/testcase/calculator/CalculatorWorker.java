@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.concurrent.Executor;
 
+import com.demo.testcase.utils.GlobalDefinitions;
 import com.demo.testcase.utils.MathOperation;
 import com.demo.testcase.utils.Result;
 
@@ -47,7 +48,7 @@ public class CalculatorWorker {
             return;
         }
 
-        MDC.put("correlation_id", correlationId);
+        MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
         logger.info("MathOperation Received | operation=" + operation);
 
         ListenableFuture<Result> resultFuture = processMathOperation(operation);
@@ -63,7 +64,7 @@ public class CalculatorWorker {
 
             MDC.clear();
         }, t -> {
-            logger.error("MathOperation: operatio error ", t);
+            logger.error("MathOperation | operation error ", t);
 
             rabbitTemplate.convertAndSend(msg.getMessageProperties().getReceivedExchange(),
                     msg.getMessageProperties().getReplyTo(),
@@ -75,7 +76,6 @@ public class CalculatorWorker {
 
             MDC.clear();
         });
-
     }
 
     private ListenableFuture<Result> processMathOperation(@NonNull MathOperation mathOperation) {

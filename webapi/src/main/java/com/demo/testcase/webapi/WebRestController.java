@@ -36,11 +36,11 @@ public class WebRestController {
    public DeferredResult<RestResult> add(@RequestParam BigDecimal a, @RequestParam BigDecimal b, HttpServletResponse response) {
       @NonNull
       String correlationId = UUID.randomUUID().toString();
-      MDC.put("correlation_id", correlationId);
+      MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
 
       logger.info("add request | a=" + a + " b=" + b);
 
-      response.setHeader("X-Correlation-ID", correlationId);
+      response.setHeader(GlobalDefinitions.XCorrelationIdHeader, correlationId);
       DeferredResult<RestResult> deferredResult = new DeferredResult<>(timeout);
       webService.mathOp(new MathOperation(a, b, correlationId, MathOperation.OperationType.Add), result -> {
          deferredResult.setResult(new RestResult(result));
@@ -55,11 +55,11 @@ public class WebRestController {
    public DeferredResult<RestResult> subtract(@RequestParam BigDecimal a, @RequestParam BigDecimal b, HttpServletResponse response) {
       @NonNull
       String correlationId = UUID.randomUUID().toString();
-      MDC.put("correlation_id", correlationId);
+      MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
 
       logger.info("subtract request | a=" + a + " b=" + b);
 
-      response.setHeader("X-Correlation-ID", correlationId);
+      response.setHeader(GlobalDefinitions.XCorrelationIdHeader, correlationId);
       DeferredResult<RestResult> deferredResult = new DeferredResult<>(timeout);
       webService.mathOp(new MathOperation(a, b, correlationId, MathOperation.OperationType.Subtraction), result -> {
          deferredResult.setResult(new RestResult(result));
@@ -73,11 +73,11 @@ public class WebRestController {
    public DeferredResult<RestResult> multiply(@RequestParam BigDecimal a, @RequestParam BigDecimal b, HttpServletResponse response) {
       @NonNull
       String correlationId = UUID.randomUUID().toString();
-      MDC.put("correlation_id", correlationId);
+      MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
 
       logger.info("multiply request | a=" + a + " b=" + b);
 
-      response.setHeader("X-Correlation-ID", correlationId);
+      response.setHeader(GlobalDefinitions.XCorrelationIdHeader, correlationId);
       DeferredResult<RestResult> deferredResult = new DeferredResult<>(timeout);
       webService.mathOp(new MathOperation(a, b, correlationId, MathOperation.OperationType.Multiplication), result -> {
          deferredResult.setResult(new RestResult(result));
@@ -91,11 +91,11 @@ public class WebRestController {
    public DeferredResult<RestResult> divide(@RequestParam BigDecimal a, @RequestParam BigDecimal b, HttpServletResponse response) {
       @NonNull
       String correlationId = UUID.randomUUID().toString();
-      MDC.put("correlation_id", correlationId);
+      MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
 
       logger.info("division request | a=" + a + " b=" + b);
 
-      response.setHeader("X-Correlation-ID", correlationId);
+      response.setHeader(GlobalDefinitions.XCorrelationIdHeader, correlationId);
       DeferredResult<RestResult> deferredResult = new DeferredResult<>(timeout);
       webService.mathOp(new MathOperation(a, b, correlationId, MathOperation.OperationType.Division), result -> {
          deferredResult.setErrorResult(new RestResult(result));

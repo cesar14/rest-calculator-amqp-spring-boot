@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
+import com.demo.testcase.utils.GlobalDefinitions;
 import com.demo.testcase.utils.MathOperation;
 import com.demo.testcase.utils.Result;
 import com.demo.testcase.webapi.config.ApplicationProperties;
@@ -68,7 +69,7 @@ public class WebServiceImpl implements WebService {
             return;
         }
 
-        MDC.put("correlation_id", correlationId);
+        MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
         logger.info("onReceive | math result response | result=" + result);
 
         if (!correlationId.equals(result.getCorrelationId())) {
@@ -85,7 +86,7 @@ public class WebServiceImpl implements WebService {
             return;
         }
 
-        MDC.put("correlation_id", correlationId);
+        MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
         logger.error("onFailure | math result response | result=" + correlationId);
 
         processMathResult(new Result(null, correlationId, "error processing math operation"));
