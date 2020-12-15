@@ -1,0 +1,5 @@
+rootProject.name = 'calculator-master'
+
+include 'calculator'
+include 'webapi'
+include 'utils'

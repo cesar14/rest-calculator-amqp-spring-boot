@@ -1,0 +1,27 @@
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+
+	compileOnly 'org.projectlombok:lombok:1.18.16'
+	annotationProcessor 'org.projectlombok:lombok:1.18.16'
+	testCompileOnly 'org.projectlombok:lombok:1.18.16'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.7'
+	compile group: 'ch.qos.logback', name: 'logback-access', version: '1.1.7'
+	compile group: 'net.rakugakibox.spring.boot', name: 'logback-access-spring-boot-starter', version: '2.7.1'
+
+	api project(":calculator")
+	api project(":utils")
+}
+
+bootJar {
+	enabled = true
+}
