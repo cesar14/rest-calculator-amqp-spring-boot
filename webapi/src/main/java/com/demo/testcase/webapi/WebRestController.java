@@ -65,7 +65,7 @@ public class WebRestController {
       DeferredResult<RestResult> deferredResult = new DeferredResult<>(timeout);
       if (a == null || b == null) {
          logger.error("request | invalid request  | a=" + a + " b=" + b);
-         deferredResult.setErrorResult(new RestResult("error invalid arguments"));
+         deferredResult.setResult(new RestResult("error invalid arguments"));
          return deferredResult;
       }
 
