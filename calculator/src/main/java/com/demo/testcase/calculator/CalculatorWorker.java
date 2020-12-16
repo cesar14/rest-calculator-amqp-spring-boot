@@ -84,6 +84,11 @@ public class CalculatorWorker {
         executor.execute(() -> {
             logger.info("exec operation | mathOperation=" + mathOperation);
 
+            if (mathOperation.getA() == null || mathOperation.getB() == null || mathOperation.getOperationType() == MathOperation.OperationType.None) {
+                future.set(new Result(null, mathOperation.getCorrelationId(), "invalid operation parameters"));
+                return;
+            }
+
             if (mathOperation.getOperationType() == MathOperation.OperationType.Add) {
                 future.set(new Result(mathOperation.getA().add(mathOperation.getB(), new MathContext(precision)), mathOperation.getCorrelationId(),
                         null));

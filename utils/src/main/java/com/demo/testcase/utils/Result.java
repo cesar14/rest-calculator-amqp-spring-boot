@@ -10,7 +10,7 @@ public class Result {
     private String correlationId;
     private String error;
 
-    Boolean isValid() {
+    Boolean hasError() {
         return error != null && !error.isEmpty();
     }
 }

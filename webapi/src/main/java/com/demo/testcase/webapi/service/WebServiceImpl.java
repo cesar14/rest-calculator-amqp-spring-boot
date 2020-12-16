@@ -72,7 +72,7 @@ public class WebServiceImpl implements WebService {
         MDC.put(GlobalDefinitions.CorrelationIdKey, correlationId);
         logger.info("onReceive | math result response | result=" + result);
 
-        if (!correlationId.equals(result.getCorrelationId())) {
+        if (result.getCorrelationId() != null && !correlationId.equals(result.getCorrelationId())) {
             logger.warn("onReceive | math result correlationId mismatch | hCorrelationId=" + correlationId, " | rCorrelationId=" + result.getCorrelationId());
         }
 
