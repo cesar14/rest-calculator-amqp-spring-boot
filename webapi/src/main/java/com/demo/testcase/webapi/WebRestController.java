@@ -70,7 +70,7 @@ public class WebRestController {
       }
 
       webService.mathOp(new MathOperation(a, b, correlationId, operationType), result -> {
-         deferredResult.setErrorResult(new RestResult(result));
+         deferredResult.setResult(new RestResult(result));
          MDC.clear();
       });
 
